@@ -1,4 +1,4 @@
-# image_upload.py
+# image_upload
 ## 项目
 上传文件夹中文件到七牛空间, 并生成外链
 
