@@ -152,7 +152,9 @@ class _Resume(object):
             url.append('mimeType/{0}'.format(urlsafe_base64_encode(self.mime_type)))
 
         if self.key is not None:
-            url.append('key/{0}'.format(urlsafe_base64_encode(self.key)))
+            if isinstance(self.key, unicode):
+                key = self.key.encode('utf-8')
+            url.append('key/{0}'.format(urlsafe_base64_encode(key)))
 
         if self.params:
             for k, v in self.params.items():

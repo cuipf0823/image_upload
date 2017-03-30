@@ -39,7 +39,9 @@ def get_files(path):
 def main():
     path = ''
     while True:
-        path = raw_input("input load path:")
+        path = raw_input("input upload path:")
+        if not isinstance(path, unicode):
+            path = path.decode('utf-8')
         if not os.path.exists(path):
             print("input path %s not exist" % path)
             continue
@@ -49,12 +51,12 @@ def main():
     files = get_files(path)
     links = []
     for key, fpath in files:
-        token = upload.create_token(config.bucket(), key)
+        token = upload.create_token(config.bucket(), key.encode('utf-8'))
         ret, info = upload.upload_files(token, key, fpath, progress_handler=com.progress_handler)
-        print("File: %s  Size: %s upload ..." % (key, com.format_size(os.path.getsize(fpath))))
         if info.status_code != 200:
-            print ("File: %s upload failed", key)
+            print ("File: %s upload failed" % key)
         else:
+            print("File: %s  Size: %s upload successfully" % (key, com.format_size(os.path.getsize(fpath))))
             link = upload.create_link(key, config.domain(), config.bucket())
             links.append([key, link])
     print ("Upload Successful!")
