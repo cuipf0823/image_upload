@@ -3,6 +3,7 @@
 from qiniu import Auth
 from qiniu import put_file
 from qiniu import utils
+import urllib
 
 
 class Upload:
@@ -32,7 +33,7 @@ class Upload:
 
     @staticmethod
     def create_link(key, domain, bucket):
-        return 'http://%s.%s/%s' % (bucket, domain, key)
+        return 'http://%s.%s/%s' % (bucket, domain, urllib.quote(key))
 
 
 

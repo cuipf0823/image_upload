@@ -57,9 +57,9 @@ def main():
             print ("File: %s upload failed" % key)
         else:
             print("File: %s  Size: %s upload successfully" % (key, com.format_size(os.path.getsize(fpath))))
-            link = upload.create_link(key, config.domain(), config.bucket())
+            link = upload.create_link(key.encode('utf-8'), config.domain(), config.bucket())
             links.append([key, link])
-    print ("Upload Successful!")
+    print ("Upload Successful! \n")
     for key, link in links:
         print ("File: %s  URL: %s" % (key, link))
 
