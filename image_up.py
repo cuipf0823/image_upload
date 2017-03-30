@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import os
+import platform
 import module.upload as up
 import module.config as config
 import module.common as com
@@ -62,6 +63,8 @@ def main():
     print ("Upload Successful! \n")
     for key, link in links:
         print ("File: %s  URL: %s" % (key, link))
+    if platform.system() == 'Windows':
+        os.system('pause')
 
 if __name__ == '__main__':
     welcome()

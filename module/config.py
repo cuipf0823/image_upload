@@ -8,7 +8,8 @@ cf = ConfigParser.ConfigParser()
 if platform.system() == 'Windows':
     cf.read(os.getcwd() + '\config.ini')
 elif platform.system() == 'Linux':
-    cf.read(os.getcwd() + '/config.ini')
+    pwd = os.path.dirname(os.path.realpath(__file__))
+    cf.read(pwd[:pwd.rfind('/')] + '/config.ini')
 
 
 def access_key():
