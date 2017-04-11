@@ -58,9 +58,10 @@ def hide_file(path):
         dir_hiden = dir_flag & win32con.FILE_ATTRIBUTE_HIDDEN
         if dir_hiden > 0:
             return True
-    elif platform.system() == 'Linux':
+    elif platform.system() == 'Linux' or platform.system() == 'Darwin':
         subs = path.split('/')
         for item in subs:
             if len(item) > 0 and item[0] == '.':
                 return True
     return False
+
