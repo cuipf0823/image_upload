@@ -20,7 +20,6 @@ def get_files(path):
     """
     filter_dir = []
     file_list = []
-    key = ''
     for parent, directorys, files in os.walk(path):
         if com.hide_file(parent):
             filter_dir.append(parent)
@@ -40,7 +39,7 @@ def get_files(path):
 def main():
     path = ''
     while True:
-        path = raw_input("input upload path:")
+        path = raw_input("input upload path or file:")
         if not isinstance(path, unicode):
             path = path.decode('utf-8')
         if not os.path.exists(path):
@@ -49,7 +48,11 @@ def main():
         else:
             break
     upload = up.Upload(config.access_key(), config.secret_key())
-    files = get_files(path)
+    files = []
+    if os.path.isfile(path):
+        files.append([os.path.basename(path), path])
+    elif os.path.isdir(path):
+        files = get_files(path)
     links = []
     for key, fpath in files:
         token = upload.create_token(config.bucket(), key.encode('utf-8'))
