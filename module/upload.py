@@ -32,8 +32,8 @@ class Upload:
         return utils.etag(file_path)
 
     @staticmethod
-    def create_link(key, domain, bucket):
-        return 'http://%s.%s/%s' % (bucket, domain, urllib.quote(key))
+    def create_link(key, domain):
+        return 'http://%s/%s' % (domain, urllib.quote(key))
 
 
 
